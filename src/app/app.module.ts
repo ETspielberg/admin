@@ -1,18 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
-
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {FileService} from './service/file.service';
+import {UserService} from './service/user.service';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MultiSelectModule, FileUploadModule, GrowlModule} from 'primeng/primeng';
+import {RouterModule} from '@angular/router';
+import {AdminUserrolesComponent} from './admin.userroles.component';
+import {appRouting} from './app.routing';
+import {AppStartComponent} from "./app.start.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppStartComponent,
+    AdminUserrolesComponent
   ],
   imports: [
-    BrowserModule
+    HttpClientModule,
+    CommonModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    RouterModule,
+    FileUploadModule,
+    GrowlModule,
+    MultiSelectModule,
+    appRouting
   ],
-  providers: [],
+  exports: [ ],
+  providers: [FileService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

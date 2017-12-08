@@ -1,0 +1,36 @@
+<div class="jumbotron">
+    <div class="container">
+        <h1>Nutzerübersicht</h1>
+        <p>Einstellungen für jeden Nutzer</p>
+    </div>
+</div>
+<div class="container">
+    <table id="sortableTable" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Username </th>
+            <th>Set Password</th>
+            <th>Roles </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+            <td>
+              {{user.username}}
+            </td>
+          <td>
+            <div class="ui-inputgroup">
+              <input [(ngModel)]="newPassword" type="password" pInputText (click)="setPassword()" placeholder="Password">
+              <button pButton type="button" label="Passwort setzen"></button>
+            </div>
+          </td>
+            <td>
+               <ul>
+                 <p-multiSelect [options]="availableRoles" [(ngModel)]="selectedRoles" [panelStyle]="{minWidth:'12em'}" defaultLabel="Rolle auswählen"></p-multiSelect>
+               </ul>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>

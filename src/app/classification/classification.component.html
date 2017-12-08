@@ -1,0 +1,43 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Classification Administration</h1>
+    <p>Tools to control classifications </p>
+  </div>
+</div>
+<div class="container">
+  <table class="table table-hover" >
+  <tbody>
+<tr (click)="buildNotationIndex()">
+  <td>
+    <h4>Notationenindex</h4>
+  </td>
+  <td>
+    Index aus Notationen erstellen.
+  </td>
+</tr>
+  </tbody>
+  </table>
+
+  <div class="row">
+  <div  class="col-md-12 main">
+    <h2>Classification-Upload</h2>
+    <p-fileUpload name="file" url="http://localhost:11855/files?module=systematik" (onUpload)="onUpload($event)"
+                  accept="text/xml" maxFileSize="100000000">
+    </p-fileUpload>
+  </div>
+</div>
+<table *ngIf="files" class="table table-hover">
+  <tbody>
+  <tr *ngFor="let file of files">
+    <td>
+      {{file.filename}}
+    </td>
+    <td>
+      <a [href]="file.link" >View</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+</div>

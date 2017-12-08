@@ -1,0 +1,37 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Lib:Intel Administration</h1>
+    <p>Kontrolle über die Einstellungen </p>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<div class="container">
+  <table class="table table-hover" >
+    <tbody>
+    <tr routerLink="userAdmin">
+      <td>
+        <h4>Nutzer verwalten</h4>
+      </td>
+      <td>
+        <p>Nutzern Rollen vergeben, löschen und Passwort setzen.</p>
+      </td>
+    </tr>
+    <tr routerLink="classification">
+      <td>
+        <h4>Klassifikation verwalten</h4>
+      </td>
+      <td>
+        <p>Dateien hochladen, anpassen und für die Analysen bereitstellen.</p>
+      </td>
+    </tr>
+    <tr (click)="updateNrequests()">
+      <td>
+        <h4>Hitliste aktualisieren</h4>
+      </td>
+      <td>
+        Die aktuellen Hitlisten erstellen.
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
