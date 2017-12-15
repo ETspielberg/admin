@@ -1,36 +1,39 @@
 <div class="jumbotron">
-    <div class="container">
-        <h1>Nutzerübersicht</h1>
-        <p>Einstellungen für jeden Nutzer</p>
-    </div>
+  <div class="container">
+    <h1>User overview</h1>
+    <p>Manage your users</p>
+  </div>
 </div>
 <div class="container">
-    <table id="sortableTable" class="table table-hover">
-        <thead>
-        <tr>
-            <th>Username </th>
-            <th>Set Password</th>
-            <th>Roles </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users">
-            <td>
-              {{user.username}}
-            </td>
-          <td>
-            <div class="ui-inputgroup">
-              <input [(ngModel)]="newPassword" type="password" pInputText (click)="setPassword()" placeholder="Password">
-              <button pButton type="button" label="Passwort setzen"></button>
-            </div>
-          </td>
-            <td>
-               <ul>
-                 <p-multiSelect [options]="availableRoles" [(ngModel)]="selectedRoles" [panelStyle]="{minWidth:'12em'}" defaultLabel="Rolle auswählen"></p-multiSelect>
-               </ul>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
+  <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+  <table id="sortableTable" class="table table-hover">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th></th>
+      <th>Set Password</th>
+      <th>Roles</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="users">
+    <tr *ngFor="let u of users">
+      <td>
+        {{u.username}}
+      </td>
+      <td>
+        <button pButton (click)="deleteUser(u)" type="button" label="Nutzer löschen" class="ui-button-danger"></button>
+      </td>
+      <td>
+        <div class="ui-inputgroup">
+          <input [(ngModel)]="u.newPassword" type="password" pInputText (click)="setPassword(u)" placeholder="Password">
+          <button pButton (click)="setPassword(u)" type="button" label="Passwort setzen"></button>
+        </div>
+      </td>
+      <td>
+        <p-multiSelect [options]="availableRoles" (onChange)="updateRoles(u)" [(ngModel)]="u.roles" [panelStyle]="{minWidth:'12em'}"
+                       defaultLabel="Rolle auswählen"></p-multiSelect>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

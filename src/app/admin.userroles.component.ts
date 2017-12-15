@@ -3,10 +3,11 @@ import {UserService} from './service/user.service';
 import {User} from './model/User';
 import {Role} from './model/Role';
 import {Option} from './model/Option';
+import {ConfirmationService} from 'primeng/primeng';
 
 @Component({
-    selector: 'app-userroles',
-    templateUrl: 'admin.userroles.component.html'
+  selector: 'app-userroles',
+  templateUrl: 'admin.userroles.component.html'
 })
 
 export class AdminUserrolesComponent implements OnInit {
@@ -19,29 +20,56 @@ export class AdminUserrolesComponent implements OnInit {
 
   public availableRoles: Option[];
 
-  public selectedRoles: number[];
-
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private confirmationService: ConfirmationService) {
     this.availableRoles = [];
   }
 
   ngOnInit(): void {
+    this.userService.getRoleNames().subscribe(
+      data => {
+        this.roles = data;
+        for (const role of this.roles) {
+          this.availableRoles.push(new Option(role, role.name.substring(5).toLowerCase()));
+          console.log(role);
+        }
+      }
+    );
+    this.updateUsers();
+  }
+
+  updateUsers() {
     this.userService.getUsers().subscribe(
       data => {
         this.users = data;
       }
     );
-    this.userService.getRoles().subscribe(
-      data => {
-        this.roles = data;
-        for (const role of this.roles) {
-          this.availableRoles.push(new Option(role.id, role.name.substring(5).toLowerCase()));
-        }
-      }
-    );
   }
 
-  setPassword(): void {
-    console.log(this.newPassword);
+  deleteUser(user: User) {
+    this.confirmationService.confirm({
+      message: 'Do you really want to delete user ' + user.username + '?',
+      accept: () => {
+        this.userService.deleteUser(user).subscribe(
+          () => this.userService.getUsers().subscribe(
+            data => this.users = data),
+          error => this.userService.getUsers().subscribe(
+            data => this.users = data)
+        );
+      }
+    });
+  }
+
+  setPassword(user: User): void {
+    this.userService.updatePassword(user).subscribe(
+      () => {
+        console.log(user.username + ' gets new password: ' + user.newPassword);
+        this.updateUsers();
+      });
+  }
+
+  updateRoles(user: User): void {
+    this.userService.updateUserroles(user).subscribe(
+      () => this.updateUsers()
+    )
   }
 }

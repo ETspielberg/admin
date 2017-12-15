@@ -1,7 +1,9 @@
+import {Role} from './Role';
+
 export class Option {
 
   constructor(
-    public value: number,
+    public value: Role,
     public label: string
   ) {}
 }
