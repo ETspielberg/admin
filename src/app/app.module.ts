@@ -12,6 +12,7 @@ import {RouterModule} from '@angular/router';
 import {AdminUserrolesComponent} from './admin.userroles.component';
 import {appRouting} from './app.routing';
 import {AppStartComponent} from './app.start.component';
+import {AuthentificationService} from './service/authentification.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {AppStartComponent} from './app.start.component';
     appRouting
   ],
   exports: [ ],
-  providers: [FileService, UserService, ConfirmationService],
+  providers: [FileService, UserService, ConfirmationService,AuthentificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

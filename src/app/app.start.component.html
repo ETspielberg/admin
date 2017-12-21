@@ -1,37 +1,28 @@
 <div class="jumbotron">
   <div class="container">
     <h1>Lib:Intel Administration</h1>
-    <p>Kontrolle über die Einstellungen </p>
+    <p>Control of users, settings etc. </p>
   </div>
 </div>
-<router-outlet></router-outlet>
 <div class="container">
-  <table class="table table-hover" >
-    <tbody>
-    <tr routerLink="userAdmin">
-      <td>
-        <h4>Nutzer verwalten</h4>
-      </td>
-      <td>
-        <p>Nutzern Rollen vergeben, löschen und Passwort setzen.</p>
-      </td>
-    </tr>
-    <tr routerLink="classification">
-      <td>
-        <h4>Klassifikation verwalten</h4>
-      </td>
-      <td>
-        <p>Dateien hochladen, anpassen und für die Analysen bereitstellen.</p>
-      </td>
-    </tr>
-    <tr (click)="updateNrequests()">
-      <td>
-        <h4>Hitliste aktualisieren</h4>
-      </td>
-      <td>
-        Die aktuellen Hitlisten erstellen.
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+      <div routerLink="userAdmin" class="tile" style="cursor:pointer;">
+      <h2>Users</h2>
+      <p>Set user roles, delete users and (re)set their passwords.</p>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3" style="cursor:pointer;">
+      <div routerLink="classification" class="tile">
+        <h2>Classification</h2>
+        <p>Upload files, build classification index and provide them for analyses.</p>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+      <div (click)="updateNrequests()" class="tile" style="cursor:pointer;">
+        <h2>Update hitlists</h2>
+        <p>Collect the actual requests to build the hitlists.</p>
+      </div>
+    </div>
+  </div>
 </div>

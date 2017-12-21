@@ -31,6 +31,12 @@ export class UserService {
     return this.http.patch(appGlobals.userUrl + '/users/' + user.id, {newPassword: user.newPassword}, {headers: appGlobals.headers});
   }
   updateUserroles(user: User): Observable<object> {
-    return this.http.patch(appGlobals.userUrl + '/users/' + user.id, {roles: user.roles}, {headers: appGlobals.headers});
+    let roles = JSON.stringify(user.roles);
+    console.log(roles);
+    if (roles.indexOf('_$visited') > -1) {
+      roles = roles.replace(',"_$visited":true', '');
+    }
+    console.log(roles);
+    return this.http.patch(appGlobals.userUrl + '/users/' + user.id, {roles: roles}, {headers: appGlobals.headers});
   }
 }

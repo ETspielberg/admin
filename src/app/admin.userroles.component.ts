@@ -62,7 +62,6 @@ export class AdminUserrolesComponent implements OnInit {
   setPassword(user: User): void {
     this.userService.updatePassword(user).subscribe(
       () => {
-        console.log(user.username + ' gets new password: ' + user.newPassword);
         this.updateUsers();
       });
   }
